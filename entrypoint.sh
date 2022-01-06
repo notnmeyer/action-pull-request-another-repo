@@ -3,7 +3,7 @@
 set -e
 set -x
 
-init()
+init
 
 CLONE_DIR=$(mktemp -d)
 

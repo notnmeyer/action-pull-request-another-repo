@@ -16,7 +16,12 @@ verify() {
     [ -z "$INPUT_SOURCE_FOLDER" ] && echo "Source folder must be defined" && exit 1
     [ -z "$INPUT_PR_TITLE" ] && echo "PR title must be defined" && exit 1
     [ -z "$INPUT_PR_DESCRIPTION" ] && echo "PR description must be defined" && exit 1
-    [ -n "$INPUT_PULL_REQUEST_REVIEWERS" ] && PULL_REQUEST_REVIEWERS="-r $INPUT_PULL_REQUEST_REVIEWERS"
+
+    if [ -n "$INPUT_PULL_REQUEST_REVIEWERS" ]; then
+        PULL_REQUEST_REVIEWERS="-r $INPUT_PULL_REQUEST_REVIEWERS"
+    else
+        PULL_REQUEST_REVIEWERS=""
+    fi
 
     if [ "$INPUT_DESTINATION_HEAD_BRANCH" = "main" ] || [ "$INPUT_DESTINATION_HEAD_BRANCH" = "master" ]; then
         echo "Destination head branch cannot be 'main' or 'master'"
@@ -44,13 +49,12 @@ git_prepare_destination_branch() {
     echo "Copying contents to git repo"
     mkdir -p "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
 
-    # `--delete` removes any files not present in the source folder
+    # `--delete` removes any files in the destination not present in the source folder
     # `--exclude=.git/` prevents the destination's .git dir from being deleted
     rsync \
         -a "$INPUT_SOURCE_FOLDER/" "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/" \
         --delete \
-        --exclude ".git/" \
-        --verbose
+        --exclude ".git/"
 
     cd "$CLONE_DIR"
     git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"

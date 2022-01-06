@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/sh
 set -ex
 
 CLONE_DIR=$(mktemp -d)

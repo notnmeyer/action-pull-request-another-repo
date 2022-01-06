@@ -56,7 +56,7 @@ if git status | grep -q "Changes to be committed"
 then
     git commit --message "Update from https://github.com/$GITHUB_REPOSITORY/commit/$GITHUB_SHA"
     echo "Pushing git commit"
-    git push -u origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH
+    git push -u origin HEAD:$INPUT_DESTINATION_HEAD_BRANCH --force
     echo "Creating a pull request"
     gh pr create \
     --title "$INPUT_PR_TITLE" \

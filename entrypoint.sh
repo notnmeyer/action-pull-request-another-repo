@@ -15,7 +15,7 @@ then
     exit 1
 fi
 
-if [ -z "$INPUT_PR_DESCRIPTION"]
+if [ -z "$INPUT_PR_DESCRIPTION" ]
 then
     echo "PR description must be defined"
     exit 1

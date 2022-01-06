@@ -61,6 +61,8 @@ git_prepare_destination_branch() {
         echo "Pushing git commit"
         git push -u origin "HEAD:$INPUT_DESTINATION_HEAD_BRANCH"
     else
+        pwd
+        ls -lah
         echo "No changes detected"
         exit 0
     fi

@@ -16,6 +16,12 @@ inputs:
   user_name:
     description: 'GitHub username for the commit'
     required: true
+  pr_title:
+    description: The title for the PR
+    required: true
+  pr_description:
+    description: The description for the PR
+    required: true
   destination_head_branch:
     description: 'The branch to create to push the changes. Cannot be master or main'
     required: true
@@ -35,6 +41,8 @@ runs:
     - ${{ inputs.destination-folder }}
     - ${{ inputs.user-email }}
     - ${{ inputs.user-name }}
+    - ${{ inputs.pr-title }}
+    - ${{ inputs.pr-description }}
     - ${{ inputs.destination-head-branch }}
     - ${{ inputs.destination-base-branch }}
     - ${{ inputs.pull-request-reviewers }}

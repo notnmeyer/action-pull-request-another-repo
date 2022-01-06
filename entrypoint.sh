@@ -3,7 +3,7 @@
 set -e
 set -x
 
-init
+verify
 
 CLONE_DIR=$(mktemp -d)
 
@@ -39,7 +39,7 @@ else
     echo "No changes detected"
 fi
 
-function init {
+function verify {
     [ -z "$INPUT_SOURCE_FOLDER" ] && echo "Source folder must be defined" && exit 1
     [ -z "$INPUT_PR_TITLE" ] && echo "PR title must be defined" && exit 1
     [ -z "$INPUT_PR_DESCRIPTION" ] && echo "PR description must be defined" && exit 1

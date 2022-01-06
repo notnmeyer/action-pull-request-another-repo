@@ -47,9 +47,10 @@ git_prepare_destination_branch() {
     # `--delete` removes any files not present in the source folder
     # `--exclude=.git/` prevents the destination's .git dir from being deleted
     rsync \
+        -a "$INPUT_SOURCE_FOLDER/" "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/" \
         --delete \
         --exclude ".git/" \
-        -a "$INPUT_SOURCE_FOLDER/" "$CLONE_DIR/$INPUT_DESTINATION_FOLDER/"
+        --verbose
 
     cd "$CLONE_DIR"
     git checkout -b "$INPUT_DESTINATION_HEAD_BRANCH"
